@@ -5,50 +5,36 @@ library(boastUtils)
 library(devtools)
 
 ui <- list(
-  dashboardPage(#skin="black",
-    
-    #Title
-    dashboardHeader(title="Overfitting",titleWidth=235),
+  dashboardPage(
+    skin = "black",
+    dashboardHeader(
+      title="Overfitting",
+      titleWidth=235, 
+      tags$li(class = "dropdown", actionLink("info", icon("info"))),
+      tags$li(class = "dropdown", 
+              boastUtils::surveyLink(name = "Overfitting")),
+      tags$li(class = "dropdown", tags$a(href = 'https://shinyapps.science.psu.edu/', icon("home")))),
     
     #Sidebar
     dashboardSidebar(
       width = 235,
       sidebarMenu(
-        id = "tabs",
-        menuItem("Prerequisites",tabName = "pre",icon = icon("book")),
-        menuItem("Overview", tabName = "over", icon = icon("dashboard")),
-        menuItem("Exploration", tabName = "first", icon = icon("wpexplorer"))
-      )),
+        id = "pages",
+        menuItem("Overview",tabName = "over",icon = icon("dashboard")),
+        menuItem("Prerequisites", tabName = "pre", icon = icon("book")),
+        menuItem("Explore", tabName = "first", icon = icon("wpexplorer"))
+      ),
+      tags$div(
+        class = "sidebar-logo",
+        boastUtils::sidebarFooter()
+      )
+      ),
     
-    #Content within the tabs
+    #Content within the pages
     dashboardBody(
       
-      tags$head(
-        tags$link(rel = "stylesheet", type = "text/css", href = "sidebar.css"),
-        tags$style(HTML(".js-irs-0 .irs-single, .js-irs-0 .irs-bar-edge, .js-irs-0 .irs-bar {background: #ffb6c1}")),
-        tags$style(HTML(".js-irs-1 .irs-single, .js-irs-1 .irs-bar-edge, .js-irs-1 .irs-bar {background: #ffb6c1}")),
-        tags$style(HTML(".js-irs-2 .irs-single, .js-irs-2 .irs-bar-edge, .js-irs-2 .irs-bar {background: #ffb6c1}"))
-      ),
-      
       tabItems(
-        tabItem(tabName = "pre",
-                h3(tags$b("Background: Overfitting")),br(),
-                h4(strong("Understanding the overfitting effect:")),
-                withMathJax(),
-                h4(tags$li("A reasearcher looks at many explanatory variables
-                                      and picks the one that predicts Y the best.")),
-                
-                
-                h4(tags$li("But if we draw another sample randomly from the 
-                                      same model, it will not fit nearly as well.")),
-                
-                br(),
-                
-                div(style = "text-align: center",bsButton("goover", "Go to the overview", icon("bolt"), size = "large"))
-        ),
         tabItem(tabName = "over",
-                tags$a(href='http://stat.psu.edu/',tags$img(src='PS-HOR-RGB-2C.png', align = "left", width = 180)),
-                br(),br(),br(),
                 h3(tags$b("About:")),
                 h4("This app explores how you can become overconfident
                                       when you are choosing the best explanatory variable from many choices."),
@@ -68,18 +54,45 @@ ui <- list(
                            tags$strong("plot button"),
                            "again.")),
                 
-                div(style = "text-align: center",bsButton("explore", "Explore", icon("bolt"), size = "large")),
+                div(
+                  style = "text-align: center",
+                  bsButton(
+                    inputId = "explore", 
+                    label = "Go to Prerequisites", 
+                    icon = icon("bolt"), 
+                    size = "large", 
+                    style = "default")),
                 br(),
                 h3(tags$b("Acknowledgements:")),
                 h4("This app was developed and coded by Jinglin Feng. Special thanks to Alex Chen for being my partner in this project.")
                 
         ),
         
+        tabItem(tabName = "pre",
+                h3(tags$b("Background: Overfitting")),br(),
+                h4(strong("Understanding the overfitting effect:")),
+                withMathJax(),
+                h4(tags$li("A reasearcher looks at many explanatory variables
+                                      and picks the one that predicts Y the best.")),
+                
+                
+                h4(tags$li("But if we draw another sample randomly from the 
+                                      same model, it will not fit nearly as well.")),
+                
+                br(),
+                
+                div(
+                  style = "text-align: center",
+                  bsButton(
+                    inputId = "goover", 
+                    label = "Go to Explore", 
+                    icon = icon("bolt"), 
+                    size = "large",
+                    style = "default"))
+        ),
+        
         #Define the content contained within part 1 ie. tabname "first"
         tabItem(tabName = "first",
-                div(style="display: inline-block;vertical-align:top;",
-                    tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 15))
-                ),
                 fluidRow(
                   withMathJax(),
                   column(4,
@@ -92,26 +105,34 @@ ui <- list(
                      explanatory variables and the response variable. Later, the 
                      researcher will run a validation study with new, independent
                      observations for X."),
-                     
-                     # tags$style(HTML(".js-irs-0 .irs-single, .js-irs-0 .irs-bar-edge, .js-irs-0 .irs-bar {background: #000000}")),
-                     # tags$style(HTML(".js-irs-1 .irs-single, .js-irs-1 .irs-bar-edge, .js-irs-1 .irs-bar {background: #000000}")),
-                     # tags$style(HTML(".js-irs-2 .irs-single, .js-irs-2 .irs-bar-edge, .js-irs-2 .irs-bar {background: #000000}")),
+
                      
                      sliderInput("n", "Sample Size:", min = 2, max = 50, value = 5 ,
                                  step = 1),
-                     bsPopover("n", "", "Number of Observations", place="right",options = list(container = "body")),
+                     bsPopover("n", "", "Number of Observations", 
+                               place="right",
+                               options = list(container = "body")),
                      
                      sliderInput("p", "True Population Correlation:", min = -0.9, max = 0.9 , value = 0,
                                  step = 0.01),
                      
-                     bsPopover("p", "", "Move the slider to change true population correlation", place="right",options = list(container = "body")),
+                     bsPopover("p", "", "Move the slider to change 
+                               true population correlation", 
+                               place="right",
+                               options = list(container = "body")),
                      
                      sliderInput("k", "The Number of Variables:", min = 1, max = 100 , value = 100 ,
                                  step = 1),
                      bsPopover("k", "", "Move the slider to change the number of explanatory variables you are choosing from", place="right",options = list(container = "body")),
                      
                      actionButton("plot", h5(tags$strong("Click to plot a new dataset"))), 
-                     bsPopover("plot", "", "The scatterplot on the left shows the relationship between the best picked X and Y.  The box plot on the right summarizes the distribution of the residuals when you predict Y from the best picked X.", place="right",options = list(container = "body")),
+                     bsPopover("plot", "", "The scatterplot on the left shows 
+                               the relationship between the best picked X and Y.
+                               The box plot on the right summarizes the 
+                               distribution of the residuals when you predict 
+                               Y from the best picked X.", 
+                               place="right",
+                               options = list(container = "body")),
                      br(),
                      br(),
                      conditionalPanel("input.plot != 0",
@@ -162,11 +183,11 @@ ui <- list(
 server <-(function(input, output,session) {
   #Go to overview Button
   observeEvent(input$goover, {
-    updateTabItems(session, "tabs", "over")
+    updateTabItems(session, "pages", "first")
   })
   #Explore Button
   observeEvent(input$explore, {
-    updateTabItems(session, "tabs", "first")
+    updateTabItems(session, "pages", "pre")
   })
   
   plotdata<-reactive({
