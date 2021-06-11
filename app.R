@@ -3,7 +3,6 @@ library(shinydashboard)
 library(shinyBS)
 library(boastUtils)
 library(shinyWidgets)
-#library(devtools)
 
 ui <- list(
   dashboardPage(
@@ -39,14 +38,16 @@ ui <- list(
       tabItems(
         tabItem(tabName = "over",
                 h1("Overfitting"),
-                p("Give description of the app here"),
                 p("This app explores how you can become overconfident
-                                      when you are choosing the best explanatory variable from many choices."),
+                  when you are choosing the best explanatory variable from 
+                  many choices.  This is just one of several different types
+                  of overfitting that can occur."),
                 br(),
                 tags$ul(
                 h3(strong("Instructions")),
-                tags$li("Move the sliders to change the values of the sample size, the true population correlation 
-                                      and the number of variables you are choosing from."),
+                tags$li("Move the sliders to change the values of the sample size, 
+                        the true population correlation 
+                        and the number of variables you are choosing from."),
                 tags$li("You need to ",
                            
                            tags$strong("first"), "click the ",
@@ -74,7 +75,7 @@ ui <- list(
         ),
         
         tabItem(tabName = "pre",
-                h2("Understanding the overfitting effect"),
+                h1("Understanding the overfitting effect"),
                 withMathJax(),
                 tags$ul(
                 tags$li("A reasearcher looks at many explanatory variables
@@ -82,7 +83,9 @@ ui <- list(
                 
                 
                 tags$li("But if we draw another sample randomly from the 
-                                      same model, it will not fit nearly as well."),
+                                      same model, it will not fit nearly as well.")),
+                br(),
+                br(),
                 tags$ul(
                   h3(strong("Examples")),
                   tags$li("The first example of overfitting is the way it is 
@@ -96,7 +99,7 @@ ui <- list(
                 ),
                 
                 br(),
-                ),
+                
                 div(
                   style = "text-align: center",
                   bsButton(
@@ -262,7 +265,8 @@ server <- (function(input, output,session) {
         session = session, 
         type = "info",
         title = "Information",
-        text = "Enter info description here."
+        text = "This app focuses on the effects of overfitting, specifically
+        exploring one example of the different types of overfitting."
       )
     }
   )
