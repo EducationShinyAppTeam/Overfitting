@@ -65,17 +65,18 @@ ui <- list(
                   bsButton(
                     inputId = "explore", 
                     label = "Prerequisites", 
-                    icon = icon("bolt"), 
+                    icon = icon("book"), 
                     size = "large", 
                     style = "default")),
                 br(),
                 h3(strong("Acknowledgements")),
-                p("This app was developed and coded by Jinglin Feng. Special thanks to Alex Chen for being my partner in this project.")
+                p("This app was developed and coded by Jinglin Feng and modified
+                  by Adam Poleski in 2021.")
                 
         ),
         
         tabItem(tabName = "pre",
-                h1("Understanding the overfitting effect"),
+                h1("Understanding the Overfitting Effect"),
                 withMathJax(),
                 tags$ul(
                 tags$li("A reasearcher looks at many explanatory variables
@@ -86,15 +87,15 @@ ui <- list(
                                       same model, it will not fit nearly as well.")),
                 br(),
                 br(),
+                p("Overfitting is likely to occur when we have too many 
+                  parameters to estimate compared to the sample size available. 
+                  For example, Overfitting may occur"),
                 tags$ul(
-                  h3(strong("Examples")),
-                  tags$li("The first example of overfitting is the way it is 
-                          explored in this app, when we have too many parameters
-                          to estimate."),
-                  tags$li("The second example of overfitting occurs when 
-                          a high dimensional polynomial dataset is being handled."),
-                  tags$li("The third example of overfitting occurs when too many 
-                          variables are allowed in to one model")
+                  tags$li("when a high dimensional polynomial model is being fit;"),
+                  tags$li("when too many explanatory variables are in the model; or"),
+                  tags$li("when just one or two variables are in the model 
+                          chosen from a large number of possible explanatory 
+                          variables(this is the topic of this app)")
                   
                 ),
                 
@@ -148,7 +149,7 @@ ui <- list(
                                of explanatory variables you are choosing from",
                                place = "right",options = list(container = "body")),
                      
-                     actionButton("plot", h5(tags$strong("Click to plot a new dataset"))), 
+                     actionButton("plot", h5(tags$strong("Show plots for new sample"))), 
                      bsPopover("plot", "", "The scatterplot on the left shows 
                                the relationship between the best picked X and Y.
                                The box plot on the right summarizes the 
@@ -161,7 +162,7 @@ ui <- list(
                      conditionalPanel("input.plot != 0",
                                       actionButton("validate", 
                                                    h5(tags$strong(
-                                                     "Click here later to Validate"))))),
+                                                     "Show plots for validation data"))))),
                   bsPopover("validate", "", "Click to show a scatterplot of Y 
                             versus X for the new data used to validate the 
                             relationship and a box plot of the distribution 
