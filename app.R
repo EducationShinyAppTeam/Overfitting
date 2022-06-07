@@ -9,7 +9,7 @@ ui <- list(
     skin = "black",
     dashboardHeader(
       title = "Overfitting",
-      titleWidth = 235, 
+      titleWidth = 250, 
       tags$li(class = "dropdown", actionLink("info", icon("info"))),
       tags$li(class = "dropdown", 
               boastUtils::surveyLink(name = "Overfitting")),
@@ -17,7 +17,7 @@ ui <- list(
     
     #Sidebar
     dashboardSidebar(
-      width = 235,
+      width = 250,
       sidebarMenu(
         id = "pages",
         menuItem("Overview",tabName = "over",icon = icon("dashboard")),
@@ -71,15 +71,15 @@ ui <- list(
                 br(),
                 h3(strong("Acknowledgements")),
                 p("This app was developed and coded by Jinglin Feng and modified
-                  by Adam Poleski in 2021.")
-                
+                  by Adam Poleski in 2021."),
+                div(class = "updated", "Last Update: 06/07/2020 by Junjie He.")
         ),
         
         tabItem(tabName = "pre",
                 h1("Understanding the Overfitting Effect"),
                 withMathJax(),
                 tags$ul(
-                tags$li("A reasearcher looks at many explanatory variables
+                tags$li("A researcher looks at many explanatory variables
                                       and picks the one that predicts Y the best."),
                 
                 
@@ -95,7 +95,12 @@ ui <- list(
                   tags$li("when too many explanatory variables are in the model; or"),
                   tags$li("when just one or two variables are in the model 
                           chosen from a large number of possible explanatory 
-                          variables(this is the topic of this app)")
+                          variables(this is the topic of this app)"),
+                  tags$li("however, more sample size would prevent overfitting; and"),
+                  tags$li("too many variables might lead to the overfitting some of 
+                         variables retained in the model are actually noise variables, 
+                         the model cannot be validated in future dataset."),
+                  
                   
                 ),
                 
@@ -115,7 +120,8 @@ ui <- list(
         tabItem(tabName = "first",
                 fluidRow(
                   withMathJax(),
-                  column(4,
+                  column(
+                    width=4,
                          h3("Introduction:"),
                          box(width = "10.5%",background = "maroon",
                              "A researcher is about to look at many explanatory 
@@ -192,16 +198,11 @@ ui <- list(
                          plotOutput("plott"),
                          
                          br(),
+                         
                          conditionalPanel("input.validate != 0",
                                           
                                           
-                                          h3("Challenge:"),
                                           
-                                          
-                                          h4("How does the overfitting effect depend on 
-                                     sample sizes, true population correlation and 
-                                     the number of variables you are choosing from ?")
-                                     
                          ))
                   
                   
