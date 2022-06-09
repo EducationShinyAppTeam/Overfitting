@@ -179,7 +179,7 @@ ui <- list(
                   h3("Plot:"),
                   column(4,   
                          align = "center",
-                         plotOutput("scatter", height = 360),
+                         plotOutput("scatter"),
                          tableOutput("choose"),
                          bsPopover("choose", "", "Compare the 
                                    sample best Correlation to 
@@ -187,14 +187,12 @@ ui <- list(
                                    (in absolute terms). ", 
                                    place = "bottom",
                                    options = list(container = "body")),
-                         plotOutput("scatter2",height = 360)
+                         plotOutput("scatter2")
                          
                   ),
                   
                   column(4,
-                         br(),
-                         br(),
-                         br(),
+                         
                          plotOutput("plott"),
                          
                          br(),
