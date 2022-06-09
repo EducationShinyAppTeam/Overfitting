@@ -42,9 +42,10 @@ ui <- list(
                   when you are choosing the best explanatory variable from 
                   many choices.  This is just one of several different types
                   of overfitting that can occur."),
-                br(),
-                tags$ul(
-                h3(strong("Instructions")),
+                
+              
+                h2("Instructions"),
+                tags$ol(
                 tags$li("Move the sliders to change the values of the sample size, 
                         the true population correlation 
                         and the number of variables you are choosing from."),
@@ -240,6 +241,10 @@ ui <- list(
             "Victor Perrier, Fanny Meyer and David Granjon (2018). 
             shinyWidgets: Custom Inputs Widgets for Shiny. R package version 0.4.3."
           ),
+          br(),
+          br(),
+          br(),
+          
           boastUtils::copyrightInfo()
         )
       )
