@@ -228,17 +228,17 @@ ui <- list(
           
           p(
             class = "hangingindent",
-            "Chang W and Borges Ribeiro B (2017). 
+            "Chang, W. and Borges, Ribeiro B. (2017). 
           shinydashboard: Create Dashboards with ‘Shiny’. R package version 0.6.1"
           ),
           p(
             class = "hangingindent",
-            "Chang W, Cheng J, Allaire J, Xie Y and Mcpherson J (2017). 
+            "Chang W., Cheng J., Allaire J., Xie Y and Mcpherson J (2017). 
           shiny: Web Application Framework for R. R package version 1.0.3"
           ),
           p(
             class = "hangingindent",
-            "Victor Perrier, Fanny Meyer and David Granjon (2018). 
+            " Perrier V., Meyer F., and Granjon D (2018). 
             shinyWidgets: Custom Inputs Widgets for Shiny. R package version 0.4.3."
           ),
           br(),

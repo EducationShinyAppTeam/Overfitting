@@ -6,9 +6,9 @@ Authors@R: c(
    person(given = "Jinglin ", family = "Feng ", role = c("aut", "cre")),
    person(given = "Adam ", family = "Poleski ", role = c("aut"))
   )
- Chapter: 6 Regression 
- Description: This app mainly focus on the Overfitting from Chapter 6.
- LearningObjectives: c(
+Chapter: 6 Regression 
+Description: This app mainly focus on the Overfitting from Chapter 6.
+LearningObjectives: c(
     "The student will learn to understand Concept of Overfitting from chapter 6."
   )
 DisplayMode: Normal
