@@ -215,13 +215,13 @@ ui <- list(
           h2("References"),
           p(
             class = "hangingindent",
-            "Bailey, E. (2015), shinyBS: Twitter bootstrap components for shiny.
+            "Bailey, E. (2015). shinyBS: Twitter bootstrap components for shiny.
           (v0.61). [R package]. Available from
           https://CRAN.R-project.org/package=shinyBS"
           ),
           p(
             class = "hangingindent",
-            "Carey, R. and Hatfield, N. (2020), boastUtils: BOAST Utilities. 
+            "Carey, R. and Hatfield, N. (2020). boastUtils: BOAST Utilities. 
           (v. 0.1.10.2), [R package] Available from 
           https://github.com/EducationShinyAppTeam/boastUtils"
           ),
@@ -233,12 +233,12 @@ ui <- list(
           ),
           p(
             class = "hangingindent",
-            "Chang W., Cheng J., Allaire J., Xie Y and Mcpherson J (2017). 
+            "Chang, W., Cheng, J., Allaire, J., Xie, Y and Mcpherson, J. (2017). 
           shiny: Web Application Framework for R. R package version 1.0.3"
           ),
           p(
             class = "hangingindent",
-            " Perrier V., Meyer F., and Granjon D (2018). 
+            " Perrier, V., Meyer, F., and Granjon, D. (2018). 
             shinyWidgets: Custom Inputs Widgets for Shiny. R package version 0.4.3."
           ),
           br(),
