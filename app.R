@@ -1,21 +1,29 @@
+# Load Packages ----
 library(shiny)
 library(shinydashboard)
 library(shinyBS)
 library(boastUtils)
 library(shinyWidgets)
 
+
+# Define UI for App ----
 ui <- list(
+  
+  ## Create the app page ----
   dashboardPage(
     skin = "black",
+    
+   ## Create the app header ----
     dashboardHeader(
       title = "Overfitting",
       titleWidth = 250, 
       tags$li(class = "dropdown", actionLink("info", icon("info"))),
       tags$li(class = "dropdown", 
               boastUtils::surveyLink(name = "Overfitting")),
-      tags$li(class = "dropdown", tags$a(href = 'https://shinyapps.science.psu.edu/', icon("home")))),
+      tags$li(class = "dropdown", tags$a(href = 'https://shinyapps.science.psu.edu/'
+                                         , icon("home")))),
     
-    #Sidebar
+    ## Create the sidebar/left navigation menu ----
     dashboardSidebar(
       width = 250,
       sidebarMenu(
@@ -32,9 +40,12 @@ ui <- list(
       )
       ),
     
-    #Content within the pages
+ 
+    
+# Create the body ----
     dashboardBody(
       
+      ## Set up the Overview Page ----
       tabItems(
         tabItem(tabName = "over",
                 h1("Overfitting"),
@@ -46,7 +57,8 @@ ui <- list(
               
                 h2("Instructions"),
                 tags$ol(
-                tags$li("Move the sliders to change the values of the sample size, 
+                tags$li("Move the sliders to change the values of the sample 
+                        size, 
                         the true population correlation 
                         and the number of variables you are choosing from."),
                 tags$li("You need to ",
@@ -57,7 +69,8 @@ ui <- list(
                            tags$strong("then"), "click the ",
                            tags$strong("validate button"),"."),
                 
-                tags$li("If you want to generate a new plot with the same slider values, just click the",
+                tags$li("If you want to generate a new plot with the same slider
+                        values, just click the",
                            tags$strong("plot button"),
                            "again.")),
                 
@@ -76,8 +89,9 @@ ui <- list(
                 div(class = "updated", "Last Update: 06/07/2020 by Junjie He.")
         ),
         
+      ## Set up the Prerequisites Page ----
         tabItem(tabName = "pre",
-                h1("Understanding the Overfitting Effect"),
+                h2("Understanding the Overfitting Effect"),
                 withMathJax(),
                 tags$ul(
                 tags$li("A researcher looks at many explanatory variables
@@ -117,7 +131,7 @@ ui <- list(
                     style = "default"))
         ),
         
-        #Define the content contained within part 1 ie. tabname "first"
+      ## Set up an Explore Page----
         tabItem(tabName = "first",
                 fluidRow(
                   withMathJax(),
@@ -150,7 +164,8 @@ ui <- list(
                                place = "right",
                                options = list(container = "body")),
                      
-                     sliderInput("k", "The Number of Variables:", min = 1, max = 100 , value = 100 ,
+                     sliderInput("k", "The Number of Variables:", min = 1, max
+                                 = 100 , value = 100 ,
                                  step = 1),
                      bsPopover("k", "", "Move the slider to change the number 
                                of explanatory variables you are choosing from",
@@ -169,7 +184,8 @@ ui <- list(
                      conditionalPanel("input.plot != 0",
                                       actionButton("validate", 
                                                    h5(tags$strong(
-                                                     "Show plots for validation data"))))),
+                                                     "Show plots for validation 
+                                                     data"))))),
                   bsPopover("validate", "", "Click to show a scatterplot of Y 
                             versus X for the new data used to validate the 
                             relationship and a box plot of the distribution 
@@ -210,6 +226,9 @@ ui <- list(
                 
                 
         ),
+      
+      
+      ## Set up the References Page ----
         tabItem(
           tabName = "references",
           h2("References"),
@@ -252,7 +271,7 @@ ui <- list(
   ))
 
 
-
+# Define server logic ----
 server <- (function(input, output,session) {
   #Go to overview Button
   observeEvent(input$goover, {
@@ -386,7 +405,8 @@ server <- (function(input, output,session) {
          ylab = "Density", main = "",font.lab = 2)
     groups <- c("Best\nChosen X", "Validation\nData Set") 
     boxplot(y2 - mm$fitted.values,y1blue - mm2blue$fitted.values, 
-            names = groups, ylab = "Residuals",ylim = c(-4, 4),font.lab = 2,border = c("black", "blue"))
+            names = groups, ylab = "Residuals",ylim = c(-4, 4),font.lab = 2,
+            border = c("black", "blue"))
     #lines(d2, col="black",lwd=2)
     #lines(d1, col="blue",lwd=2)
   })
@@ -415,7 +435,8 @@ server <- (function(input, output,session) {
     kk2 <- unlist(mydata[2])
     y1blue <- unlist(mydata[3])
     mm2blue <- lm(y1blue~xmatblue[,kk2])
-    plot(xmatblue[,kk2], y1blue, xlab = "Validation set X", ylab = "Y",font.lab = 2, col = "blue",cex = 1.5)
+    plot(xmatblue[,kk2], y1blue, xlab = "Validation set X", ylab = "Y",
+         font.lab = 2, col = "blue",cex = 1.5)
     abline(mm2blue,col = "red")
   })
   
@@ -471,6 +492,7 @@ server <- (function(input, output,session) {
 })
 
 
+# Boast App Call ----
 boastUtils::boastApp(ui = ui, server = server)
 
 
