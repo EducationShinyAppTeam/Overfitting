@@ -85,7 +85,7 @@ ui <- list(
                 br(),
                 h3(strong("Acknowledgements")),
                 p("This app was developed and coded by Jinglin Feng and modified
-                  by Adam Poleski in 2021."),
+                  by Adam Poleski(2021) and Junjie He(2022)."),
                 div(class = "updated", "Last Update: 06/07/2020 by Junjie He.")
         ),
         
@@ -95,11 +95,13 @@ ui <- list(
                 withMathJax(),
                 tags$ul(
                 tags$li("A researcher looks at many explanatory variables
-                                      and picks the one that predicts Y the best."),
+                                      and picks the one that predicts Y the best.
+                        "),
                 
                 
                 tags$li("But if we draw another sample randomly from the 
-                                      same model, it will not fit nearly as well.")),
+                                      same model, it will not fit nearly as well.
+                        ")),
                 br(),
                 br(),
                 p("Overfitting is likely to occur when we have too many 
@@ -142,10 +144,10 @@ ui <- list(
                              "A researcher is about to look at many explanatory 
                      variables and pick the one X that predicts Y the best. 
                      The sliders below allow you to set the number of explanatory 
-                     variables, the sample size, and the population correlation between the 
-                     explanatory variables and the response variable. Later, the 
-                     researcher will run a validation study with new, independent
-                     observations for X."),
+                     variables, the sample size, and the population correlation 
+                     between the explanatory variables and the response variable. 
+                     Later, the researcher will run a validation study with new, 
+                     independent observations for X."),
 
                      
                      sliderInput("n", "Sample Size:", min = 2, max = 50, 
@@ -171,7 +173,8 @@ ui <- list(
                                of explanatory variables you are choosing from",
                                place = "right",options = list(container = "body")),
                      
-                     actionButton("plot", h5(tags$strong("Show plots for new sample"))), 
+                     actionButton("plot", h5(tags$strong("Show plots for new sample"
+                                                         ))), 
                      bsPopover("plot", "", "The scatterplot on the left shows 
                                the relationship between the best picked X and Y.
                                The box plot on the right summarizes the 
@@ -399,7 +402,7 @@ server <- (function(input, output,session) {
     y1blue <- bluey()
     kkblue = which.max(abs(R2))
     xmatblue = array(unlist(mydata[3]),dim = c(n,k)) 
-    mm2blue <- lm(y1blue~xmatblue[, sample(1:k, 1, replace=FALSE)]) # Randomly Chosen X
+    mm2blue <- lm(y1blue~xmatblue[, sample(1:k, 1, replace=FALSE)]) 
     d1 <- density(y1blue - mm2blue$fitted.values) # Randomly Chosen X)
     plot(range(d1$x,d2$x), range(d1$y,d2$y), type = "n", xlab = "Residual",
          ylab = "Density", main = "",font.lab = 2)
@@ -479,7 +482,8 @@ server <- (function(input, output,session) {
     random <- cor(y1blue,xmatblue[,kk2])
     xx = cbind(best,random)
     xx = as.data.frame(xx)
-    colnames(xx) = c("Sample Best Correlation","Sample Validation Set Correlation")
+    colnames(xx) = c("Sample Best Correlation","Sample Validation Set 
+                     Correlation")
     xx
   })
   value2 <- renderTable({
