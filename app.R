@@ -18,14 +18,15 @@ ui <- list(
       tags$li(class = "dropdown", actionLink("info", icon("info"))),
       tags$li(class = "dropdown", 
               boastUtils::surveyLink(name = "Overfitting")),
-      tags$li(class = "dropdown", tags$a(href = 'https://shinyapps.science.psu.edu/'
-                                         , icon("home")))),
+      tags$li(class = "dropdown", 
+              tags$a(href = 'https://shinyapps.science.psu.edu/'
+                                         , icon("house")))),
     ## Create the sidebar/left navigation menu ----
     dashboardSidebar(
       width = 250,
       sidebarMenu(
         id = "pages",
-        menuItem("Overview",tabName = "over",icon = icon("tachometer-alt")),
+        menuItem("Overview",tabName = "over",icon = icon("gauge-high")),
         menuItem("Prerequisites", tabName = "pre", icon = icon("book")),
         menuItem("Explore", tabName = "first", icon = icon("wpexplorer")),
         menuItem("References", tabName = "references", icon = icon("leanpub"))
