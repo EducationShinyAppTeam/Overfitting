@@ -1,4 +1,4 @@
-Title: Chapter 6 Regression - Overfitting
+Title: Overfitting
 ShortName: Overfitting
 Date: 2021-05-13
 Lifecycle: experimental
@@ -7,7 +7,7 @@ Authors@R: c(
    person(given = "Adam ", family = "Poleski ", role = c("aut")),
    person(given = "Junjie ", family = "He ", role = c("aut"))
   )
-Chapter: 6 Regression 
+Chapter: Regression 
 Description: This app mainly focus on the Overfitting from Chapter 6.
 LearningObjectives: c(
     "The student will learn to understand Concept of Overfitting from chapter 6."
